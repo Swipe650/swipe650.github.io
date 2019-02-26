@@ -340,7 +340,7 @@ Player.prototype = {
     var trackToSet = currentSong.artist + ' - ' + currentSong.title;
     if(track.innerHTML != trackToSet) {
       track.innerHTML = trackToSet;
-      //album.innerHTML = 'Album: ' + currentSong.album + ' (' + currentSong.year+ ')';
+      album.innerHTML = 'Album: ' + currentSong.album + ' (' + currentSong.year+ ')';
       cover.innerHTML = "<img src=\'" + currentSong.cover + "\'>";
       self.index = newIndex;
     }
@@ -357,6 +357,7 @@ function showButtons(self) {
 function showPage() {
   document.getElementById("loader").style.display = "none";
   document.getElementById("mainPage").style.display = "block";
+  playBtn.style.display = 'block';
 }
 
 var flacApiBaseUrl = 'https://api.radioparadise.com/api/get_block?bitrate=4&info=true';
@@ -367,7 +368,7 @@ var nextPlaylist;
 // Setup our new audio player class and pass it the playlist.
 var firstEvent = getNextEvent(false);
 var player = new Player(buildPlaylistForFirstEvent(firstEvent));
-player.play();
+//player.play();
 showPage();
 
 function getNextEvent(isNotBlocking, self, callback) {	
@@ -403,8 +404,8 @@ function buildPlaylistForFirstEvent(event) {
         title: currentSong.title,
         begin: (currentSong.elapsed/1000)/event.length,
         elapsed: currentSong.elapsed,
-        cover: 'http://img.radioparadise.com/' + currentSong.cover,
-        //album: currentSong.album,
+        cover: 'https://img.radioparadise.com/' + currentSong.cover,
+        album: currentSong.album,
         year: currentSong.year,
         duration: currentSong.duration
     };
@@ -430,8 +431,8 @@ function addNextEventToPlaylist(event, self) {
         title: currentSong.title,
         begin: (currentSong.elapsed/1000)/event.length,
         elapsed: currentSong.elapsed,
-        cover: 'http://img.radioparadise.com/' + currentSong.cover,
-        //album: currentSong.album,
+        cover: 'https://img.radioparadise.com/' + currentSong.cover,
+        album: currentSong.album,
         year: currentSong.year,
         duration: currentSong.duration
     };
@@ -501,4 +502,4 @@ var move = function(event) {
 };
 
 volume.addEventListener('mousemove', move);
-volume.addEventListener('touchmove', move);
+volume.addEventListener('touchmove', move); 
